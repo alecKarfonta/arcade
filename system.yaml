@@ -1,0 +1,17 @@
+name: arcade
+
+# Bundled into the Glorp nginx image at deploy time (see scripts/sync-arcade.sh).
+bundle:
+  target_repo: ~/git/musical_defense
+  paths:
+    - index.html
+    - css/
+    - js/
+
+verify:
+  - url: https://glorp.stockastic.us/
+    description: Stockastic Arcade (catalog root)
+    expect_status: 200
+  - url: https://glorp.stockastic.us/glorp-busters.html
+    description: Glorp Busters (direct link preserved)
+    expect_status: 200

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stockastic Arcade — browser games by Alec Karfonta">
+  <title>STOCKASTIC ARCADE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/arcade.css">
+</head>
+<body>
+  <div class="crt" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header class="hall-header">
+    <div class="neon-sign" aria-hidden="true">
+      <span class="flicker">STOCKASTIC</span>
+      <span class="arcade-word">ARCADE</span>
+    </div>
+    <p class="hall-sub">INSERT COIN TO CONTINUE HUMANITY</p>
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee">
+        <span id="marqueeText"></span>
+      </div>
+    </div>
+    <div class="status-bar">
+      <span>CREDITS <b id="credits">00</b></span>
+      <span class="blink">FREE PLAY</span>
+      <span id="clock">--:--</span>
+    </div>
+  </header>
+
+  <main id="cabinetFloor" class="cabinet-floor" aria-label="Game cabinets"></main>
+
+  <footer class="hall-footer">
+    <p>© STOCKASTIC INDUSTRIES · BROWSER GAMES · NO QUARTERS REQUIRED</p>
+    <p class="dim">Press <kbd>SPACE</kbd> on first cabinet · More cabinets loading soon…</p>
+  </footer>
+
+  <script type="module" src="js/arcade.js"></script>
+</body>
+</html>
