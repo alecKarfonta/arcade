@@ -1,0 +1,14 @@
+services:
+  capture:
+    build:
+      context: .
+      dockerfile: Dockerfile.previews
+    image: arcade-previews:local
+    network_mode: host
+    volumes:
+      - ..:/work
+      - /work/scripts/node_modules
+    working_dir: /work
+    environment:
+      GLORP_URL: ${GLORP_URL:-http://127.0.0.1:8888/glorp-busters.html}
+      BONE_URL: ${BONE_URL:-http://127.0.0.1:8889/bone_bombers.html}

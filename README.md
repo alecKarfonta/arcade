@@ -21,9 +21,21 @@ Game links assume the same origin as the games host (`glorp.stockastic.us`).
 | Glorp Busters | `/glorp-busters.html` |
 | Bone Bombers | `/bone/bone_bombers.html` |
 
+Cabinet screens show a gameplay poster by default. Hover or focus a screen to play a short muted loop.
+
+## Regenerate previews
+
+Captures real gameplay from local Docker game servers (Playwright + ffmpeg):
+
+```bash
+./scripts/generate-previews.sh
+```
+
+Writes `assets/previews/<game-id>/` (poster + loop clips). Requires `musical_defense` and `bone_bombers` repos at the default paths, or set `GLORP_REPO` / `BONE_REPO`.
+
 ## Add a game
 
-Edit `js/games.js` — add an entry to the `GAMES` array with title, blurb, genres, URL, and cabinet art key (`glorp` or `bone` style, or add a new art block in `css/arcade.css`).
+Edit `js/games.js` — add an entry to the `GAMES` array with title, blurb, genres, URL, cabinet art key (`glorp` or `bone` style, or add a new art block in `css/arcade.css`), and optional `preview` paths after running `generate-previews.sh`.
 
 ## Deploy
 

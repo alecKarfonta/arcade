@@ -7,6 +7,7 @@ bundle:
     - index.html
     - css/
     - js/
+    - assets/
 
 verify:
   - url: https://glorp.stockastic.us/

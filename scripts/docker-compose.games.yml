@@ -1,0 +1,14 @@
+services:
+  glorp:
+    image: nginx:alpine
+    ports:
+      - "8888:80"
+    volumes:
+      - ${GLORP_REPO:-/home/alec/git/musical_defense}:/usr/share/nginx/html:ro
+      - ./nginx-glorp-preview.conf:/etc/nginx/conf.d/default.conf:ro
+
+  bone:
+    build: ${BONE_REPO:-/home/alec/git/system/games/bone_bombers}
+    image: bone-bombers-app:local
+    ports:
+      - "8889:80"

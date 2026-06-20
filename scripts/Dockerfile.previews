@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/playwright:v1.52.0-jammy
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends ffmpeg \
+  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work/scripts
+COPY package.json ./
+RUN npm install --omit=dev
+
+WORKDIR /work

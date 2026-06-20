@@ -38,7 +38,7 @@ function genreTags(genres) {
   return genres.map((g) => `<span class="tag">${g}</span>`).join("");
 }
 
-function cabinetArt(game) {
+function cssCabinetArt(game) {
   if (game.cabinet === "glorp") {
     return `
       <div class="art glorp-art" aria-hidden="true">
@@ -64,6 +64,49 @@ function cabinetArt(game) {
     </div>`;
 }
 
+function cabinetScreen(game) {
+  const preview = game.preview;
+  if (!preview?.poster) return cssCabinetArt(game);
+
+  const label = `${game.title} gameplay preview`;
+  const sources = [
+    preview.webm ? `<source src="${preview.webm}" type="video/webm">` : "",
+    preview.mp4 ? `<source src="${preview.mp4}" type="video/mp4">` : "",
+  ].join("");
+
+  return `
+    ${cssCabinetArt(game)}
+    <div class="preview-screen" data-preview tabindex="0">
+      <img class="preview-poster" src="${preview.poster}" alt="${label}" loading="lazy" decoding="async">
+      <video class="preview-loop" poster="${preview.poster}" muted loop playsinline preload="none" aria-label="${label}">
+        ${sources}
+      </video>
+    </div>`;
+}
+
+function bindPreviewScreens(root) {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  root.querySelectorAll("[data-preview]").forEach((screen) => {
+    const video = screen.querySelector(".preview-loop");
+    if (!video || reducedMotion) return;
+
+    const play = () => {
+      const p = video.play();
+      if (p) p.catch(() => {});
+    };
+    const stop = () => {
+      video.pause();
+      video.currentTime = 0;
+    };
+
+    screen.addEventListener("mouseenter", play);
+    screen.addEventListener("mouseleave", stop);
+    screen.addEventListener("focusin", play);
+    screen.addEventListener("focusout", stop);
+  });
+}
+
 function renderCabinets() {
   const floor = $("#cabinetFloor");
   if (!floor) return;
@@ -74,7 +117,7 @@ function renderCabinets() {
         <div class="marquee-mini">${g.tagline.toUpperCase()}</div>
       </div>
       <div class="screen-bezel">
-        ${cabinetArt(g)}
+        ${cabinetScreen(g)}
         <div class="screen-glare"></div>
       </div>
       <div class="cabinet-body">
@@ -102,6 +145,8 @@ function renderCabinets() {
     });
     btn.addEventListener("mouseenter", () => blip(520, 0.04, "triangle", 0.03));
   });
+
+  bindPreviewScreens(floor);
 }
 
 function bootClock() {

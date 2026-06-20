@@ -253,6 +253,49 @@ body {
     transparent 100%
   );
   pointer-events: none;
+  z-index: 2;
+}
+
+.preview-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  outline: none;
+}
+
+.preview-screen:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.preview-poster,
+.preview-loop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.preview-loop {
+  opacity: 0;
+}
+
+.preview-screen:hover .preview-loop,
+.preview-screen:focus-within .preview-loop {
+  opacity: 1;
+}
+
+.preview-screen:hover .preview-poster,
+.preview-screen:focus-within .preview-poster {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-loop {
+    display: none;
+  }
 }
 
 .cabinet-body {

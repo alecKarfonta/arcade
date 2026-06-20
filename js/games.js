@@ -11,6 +11,11 @@ export const GAMES = [
     accent: "#00e5ff",
     accent2: "#ff2079",
     cabinet: "glorp",
+    preview: {
+      poster: "assets/previews/glorp-busters/poster.webp",
+      webm: "assets/previews/glorp-busters/loop.webm",
+      mp4: "assets/previews/glorp-busters/loop.mp4",
+    },
     blurb:
       "Clock in at VoltWorks™ and deploy sonic turrets against an endless glorp infestation. " +
       "Build mazes, unlock the Xeno Sphere Grid, and mix live music layers in the Sound Lab while " +
@@ -29,6 +34,11 @@ export const GAMES = [
     accent: "#ffc83d",
     accent2: "#ff5c33",
     cabinet: "bone",
+    preview: {
+      poster: "assets/previews/bone-bombers/poster.webp",
+      webm: "assets/previews/bone-bombers/loop.webm",
+      mp4: "assets/previews/bone-bombers/loop.mp4",
+    },
     blurb:
       "Grab your shovel and patrol the graveyard. Bust rising skeletons before they squat — " +
       "because what they leave behind is very much not a gift. Bait bomb blasts to clear crowds, " +
