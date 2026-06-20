@@ -1,6 +1,6 @@
 # Stockastic Arcade
 
-A neon-drenched browser arcade catalog for [Stockastic](https://stockastic.us) games.
+A neon-drenched browser arcade catalog for web games.
 
 **Live:** [mlapi.us/arcade/](https://mlapi.us/arcade/)
 
