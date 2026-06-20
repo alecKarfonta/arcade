@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  labels:
+    app: arcade
+    app.kubernetes.io/name: arcade
+    app.kubernetes.io/part-of: arcade
+spec:
+  type: LoadBalancer
+  selector:
+    app: arcade
+  ports:
+    - name: http
+      port: 31021
+      targetPort: http

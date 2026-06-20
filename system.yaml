@@ -1,18 +1,39 @@
 name: arcade
+namespace: arcade
 
-# Bundled into the Glorp nginx image at deploy time (see scripts/sync-arcade.sh).
-bundle:
-  target_repo: ~/git/musical_defense
-  paths:
-    - index.html
-    - css/
-    - js/
-    - assets/
+build:
+  compose_file: docker-compose.yml
+  service: app
+  homelab:
+    image: docker.io/library/arcade-app:local
+    delivery: import
+    registry:
+      repo: arcade/arcade
+      tag: local
+  registry:
+    image: ghcr.io/aleckarfonta/arcade
+    tag: latest
+    push: true
+
+k8s:
+  deployment: app
+  default_overlay: homelab
+  overlays:
+    homelab:
+      import_nodes: homelab/cpu-tier=cheap
+    production: {}
 
 verify:
-  - url: https://glorp.stockastic.us/
-    description: Stockastic Arcade (catalog root)
+  - url: http://127.0.0.1:31021/health
+    description: local health check
+  - url: https://mlapi.us/arcade/health
+    description: edge health check
     expect_status: 200
-  - url: https://glorp.stockastic.us/glorp-busters.html
-    description: Glorp Busters (direct link preserved)
-    expect_status: 200
+
+nginx:
+  name: arcade
+  host: auto
+  service: app
+  service_port: http
+  upstreams:
+    host196_arcade_api: 31021

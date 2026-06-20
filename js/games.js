@@ -7,7 +7,7 @@ export const GAMES = [
     year: "2026",
     genre: ["Tower Defense", "Synth", "Roguelite"],
     players: "1",
-    url: "/glorp-busters.html",
+    url: "/glorp/glorp-busters.html",
     accent: "#00e5ff",
     accent2: "#ff2079",
     cabinet: "glorp",

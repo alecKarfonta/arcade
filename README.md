@@ -2,7 +2,7 @@
 
 A neon-drenched browser arcade catalog for [Stockastic](https://stockastic.us) games.
 
-**Live:** [glorp.stockastic.us](https://glorp.stockastic.us/) (catalog root; games keep their direct URLs)
+**Live:** [mlapi.us/arcade/](https://mlapi.us/arcade/)
 
 ## Play locally
 
@@ -12,14 +12,19 @@ python3 -m http.server 8765
 # open http://localhost:8765
 ```
 
-Game links assume the same origin as the games host (`glorp.stockastic.us`).
+Or via Docker:
+
+```bash
+docker compose up -d
+# open http://localhost:31021
+```
 
 ## Cabinets
 
-| Game | Path |
-|------|------|
-| Glorp Busters | `/glorp-busters.html` |
-| Bone Bombers | `/bone/bone_bombers.html` |
+| Game | Path (on mlapi.us) |
+|------|---------------------|
+| Glorp Busters | [/glorp/](https://mlapi.us/glorp/) |
+| Bone Bombers | [/bone/](https://mlapi.us/bone/) |
 
 Cabinet screens show a gameplay poster by default. Hover or focus a screen to play a short muted loop.
 
@@ -31,7 +36,7 @@ Captures real gameplay from local Docker game servers (Playwright + ffmpeg):
 ./scripts/generate-previews.sh
 ```
 
-Writes `assets/previews/<game-id>/` (poster + loop clips). Requires `musical_defense` and `bone_bombers` repos at the default paths, or set `GLORP_REPO` / `BONE_REPO`.
+Writes `assets/previews/<game-id>/` (poster + loop clips). Requires [musical_defense](https://github.com/alecKarfonta/musical_defense) and bone_bombers repos at the default paths, or set `GLORP_REPO` / `BONE_REPO`.
 
 ## Add a game
 
@@ -39,16 +44,15 @@ Edit `js/games.js` — add an entry to the `GAMES` array with title, blurb, genr
 
 ## Deploy
 
-The catalog bundles into the [musical_defense](https://github.com/alecKarfonta/musical_defense) nginx image at deploy time.
+Managed k3s app (homelab):
 
 ```bash
-make arcade-deploy          # from ~/git/system — sync + deploy Glorp
-# or
-make arcade-sync            # copy only
-make app-deploy APP=glorp   # also auto-runs arcade-sync
+cd ~/git/system
+make app-deploy APP=arcade
+sudo scripts/install-nginx-app.sh arcade   # if nginx step needs sudo
 ```
 
-Registered in the homelab as `apps/arcade.yaml` (`repo: ~/git/arcade`).
+Registered in the homelab as `apps/arcade.yaml` (`repo: ~/git/arcade`). Shows in Fleet Control under **Managed Apps**.
 
 ## Stack
 

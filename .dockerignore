@@ -1,0 +1,10 @@
+.git/
+api/
+k8s/
+scripts/
+notes.md
+README.md
+requirements.txt
+system.yaml
+system.yaml.bundle.bak
+*.md

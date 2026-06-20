@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: arcade
+  labels:
+    app.kubernetes.io/name: arcade
+    app.kubernetes.io/part-of: arcade
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: mlapi.us
+      http:
+        paths:
+          - path: /arcade
+            pathType: Prefix
+            backend:
+              service:
+                name: app
+                port:
+                  number: 31021
